@@ -1,30 +1,11 @@
 import { Button } from "@/components/ui/button";
-import {
-    ArrowRight,
-    ChevronDown,
-    Facebook, Instagram,
-    Mail,
-    MapPin,
-    Menu,
-    Phone,
-    Search,
-    X
-} from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { ArrowRight, ChevronDown, Facebook, Instagram, Mail, MapPin, Menu, Phone, Search, X } from 'lucide-react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const location = useLocation();
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     const navLinks = [
         { name: 'Home', path: '/' },
@@ -64,18 +45,18 @@ const Header = () => {
             </div>
 
             {/* Main Navbar */}
-            <header className={`h-[70px] lg:h-[80px] sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-navbar/95 backdrop-blur-md shadow-2xl' : 'bg-navbar'}`}>
+            <header className={`h-[70px] lg:h-[80px] sticky top-0 z-50 transition-all duration-300 bg-navbar`}>
                 <div className="container mx-auto px-4 lg:px-0 flex items-center justify-between h-full relative">
 
                     {/* Logo with slanted background */}
-                    <div className="absolute left-0 top-0 bottom-0 bg-white w-[260px] lg:w-[300px] flex items-center px-8 z-20 shadow-xl transition-all duration-500"
+                    <div className="absolute left-0 top-0 bottom-0 bg-white w-[200px] xs:w-[260px] lg:w-[300px] flex items-center px-4 xs:px-8 z-20 shadow-xl transition-all duration-500"
                         style={{ clipPath: 'polygon(0 0, 100% 0, 85% 100%, 0% 100%)' }}>
                         <Link to="/" className="group">
-                            <img src="/logo.png" alt="Fixyland" className="h-10 lg:h-12 transition-transform" />
+                            <img src="/logo.png" alt="Fixyland" className="h-8 xs:h-10 lg:h-12 transition-transform" />
                         </Link>
                     </div>
 
-                    <div className="w-full flex items-center justify-end h-full pl-[260px] lg:pl-[300px]">
+                    <div className="w-full flex items-center justify-end h-full pl-[200px] xs:pl-[260px] lg:pl-[300px]">
                         {/* Desktop Nav Links */}
                         <nav className="hidden xl:flex items-center gap-8 text-white font-bold text-[15px] mr-12">
                             {navLinks.map((link) => (
@@ -124,7 +105,7 @@ const Header = () => {
                 </div>
 
                 {/* Mobile Menu Overlay */}
-                <div className={`fixed inset-0 bg-navbar/98 z-[100] transition-transform duration-500 xl:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                <div className={`fixed inset-0 bg-navbar z-[100] transition-transform duration-500 xl:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
                     <div className="flex flex-col items-center justify-center h-full space-y-8 relative">
                         <button
                             className="absolute top-8 right-8 text-white hover:text-premium"
@@ -140,13 +121,20 @@ const Header = () => {
                                 key={link.name}
                                 to={link.path}
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className={`text-[32px] font-black hover:text-premium transition-colors ${location.pathname === link.path ? 'text-premium' : 'text-white'
+                                className={`text-[28px] md:text-[32px] font-black hover:text-premium transition-colors ${location.pathname === link.path ? 'text-premium' : 'text-white'
                                     }`}
                             >
                                 {link.name}
                             </Link>
                         ))}
-                        <div className="pt-12 flex gap-8">
+                        <div className="pt-6">
+                            <Button asChild onClick={() => setIsMobileMenuOpen(false)} className="bg-premium hover:bg-white text-black font-black h-16 px-12 rounded-none transition-all duration-300 shadow-[4px_4px_0px_rgba(255,255,255,0.2)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 text-lg">
+                                <Link to="/booking">
+                                    BOOK NOW <ArrowRight className="ml-2 h-6 w-6" />
+                                </Link>
+                            </Button>
+                        </div>
+                        <div className="pt-8 flex gap-8">
                             <Facebook className="text-white hover:text-premium cursor-pointer" size={24} />
                             <Instagram className="text-white hover:text-premium cursor-pointer" size={24} />
                         </div>

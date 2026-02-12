@@ -1,36 +1,35 @@
 
 import Hero from '@/components/Hero';
-import { Icon } from 'lucide-react';
 
 const Services = () => {
     const services = [
         {
-            icon: <Icon />,
+            icon: "",
             title: "Swimming Pool",
             description: "Relax by our infinity pool with a stunning ocean view."
         },
         {
-            icon: <Icon />,
+            icon: "",
             title: "Spa & Wellness",
             description: "Rejuvenate your body and mind with our expert therapists."
         },
         {
-            icon: <Icon />,
+            icon: "",
             title: "Fitness Center",
             description: "Stay fit with our state-of-the-art gym equipment."
         },
         {
-            icon: <Icon />,
+            icon: "",
             title: "Fine Dining",
             description: "Savor exquisite cuisines from around the world."
         },
         {
-            icon: <Icon />,
+            icon: "",
             title: "Airport Shuttle",
             description: "Hassle-free transportation to and from the airport."
         },
         {
-            icon: <Icon />,
+            icon: "",
             title: "Laundry Service",
             description: "Convenient laundry and dry cleaning services."
         }

@@ -8,7 +8,7 @@ const Booking = () => {
 
     //////////////////////////////////////// STATES 
     const [hotels, setHotels] = useState([]);
-    const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', phone: '', type: '', room: '', checkIn: '', checkOut: '', message: '' });
+    const [formData, setFormData] = useState({ firstName: 'Test', lastName: 'User', email: '', phone: '', type: '', room: '', checkIn: '', checkOut: '', message: 'test' });
     const [status, setStatus] = useState({ type: '', message: '' });
 
     //////////////////////////////////////// EFFECTS 

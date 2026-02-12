@@ -2,7 +2,7 @@ import { Facebook, Instagram, Send } from 'lucide-react';
 
 const Footer = () => {
     return (
-        <footer className="bg-footer text-primary-foreground py-10 px-4 relative overflow-hidden font-sans border-t border-white/5 min-h-[30vh] max-h-[40vh] flex flex-col justify-center">
+        <footer className="bg-footer text-primary-foreground py-16 px-4 relative overflow-hidden font-sans border-t border-white/5">
             {/* Background Pattern - subtle map effect */}
             <div
                 className="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -26,19 +26,22 @@ const Footer = () => {
                             Nam libero tempore cum soluta nobis esteligendi optio cumque nihile impedit quo minus maxime placeat facere.
                         </p>
                         <div className="flex gap-2 pt-2">
-                            {[Facebook, 'X', Instagram, 'Be'].map((item, i) => (
-                                <a
-                                    key={i}
-                                    href="#"
-                                    className="w-9 h-9 bg-white/[0.05] flex items-center justify-center hover:bg-primary transition-all rounded-[4px]"
-                                >
-                                    {typeof item === 'string' ? (
-                                        <span className="text-[12px] font-black">{item}</span>
-                                    ) : (
-                                        <item size={14} className="text-primary-foreground" />
-                                    )}
-                                </a>
-                            ))}
+                            {[Facebook, 'X', Instagram, 'Be'].map((item, i) => {
+                                const Icon = item;
+                                return (
+                                    <a
+                                        key={i}
+                                        href="#"
+                                        className="w-9 h-9 bg-white/[0.05] flex items-center justify-center hover:bg-primary transition-all rounded-[4px]"
+                                    >
+                                        {typeof item === 'string' ? (
+                                            <span className="text-[12px] font-black">{item}</span>
+                                        ) : (
+                                            <Icon size={14} className="text-primary-foreground" />
+                                        )}
+                                    </a>
+                                );
+                            })}
                         </div>
                     </div>
 
