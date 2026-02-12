@@ -1,5 +1,5 @@
 
-const SectionHeader = ({ badge, title, align = 'center', className = "" }) => {
+const SectionHeader = ({ badge, title, align = 'center', className = "" , titleClassName= ''}) => {
     const isCenter = align === 'center';
 
     return (
@@ -10,7 +10,7 @@ const SectionHeader = ({ badge, title, align = 'center', className = "" }) => {
                     <span className="text-primary font-bold uppercase tracking-[0.2em] text-[11px]">{badge}</span>
                 </div>
             </div>
-            <h2 className={`text-[36px] md:text-[40px] font-black text-foreground tracking-tight leading-[1.1] ${isCenter ? 'max-w-3xl mx-auto' : ''}`}>
+            <h2 className={`text-[36px] md:text-[40px] font-black text-foreground ${titleClassName} tracking-tight leading-[1.1] ${isCenter ? 'max-w-3xl mx-auto' : ''}`}>
                 {title}
             </h2>
         </div>

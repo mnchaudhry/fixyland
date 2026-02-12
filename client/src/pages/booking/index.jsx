@@ -8,9 +8,9 @@ const Booking = () => {
 
     //////////////////////////////////////// STATES 
     const [hotels, setHotels] = useState([]);
-    const [formData, setFormData] = useState({     firstName: '',     lastName: '',     email: '',     phone: '',     type: 'Luxury',     room: 'Deluxe',     checkIn: '',     checkOut: '',     message: '' });
+    const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', phone: '', type: '', room: '', checkIn: '', checkOut: '', message: '' });
     const [status, setStatus] = useState({ type: '', message: '' });
-    
+
     //////////////////////////////////////// EFFECTS 
     useEffect(() => {
         const fetchHotels = async () => {
@@ -44,8 +44,8 @@ const Booking = () => {
                 lastName: '',
                 email: '',
                 phone: '',
-                type: 'Luxury',
-                room: 'Deluxe',
+                type: '',
+                room: '',
                 checkIn: '',
                 checkOut: '',
                 message: ''

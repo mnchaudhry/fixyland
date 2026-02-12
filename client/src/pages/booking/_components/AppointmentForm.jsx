@@ -1,14 +1,9 @@
+import SectionHeader from "@/components/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowRight, Calendar as CalendarIcon } from 'lucide-react';
 
@@ -16,15 +11,15 @@ const AppointmentForm = ({ formData, handleChange, handleSelectChange, handleSub
     return (
         <section className="py-24 bg-background">
             <div className="container mx-auto px-4">
+                <SectionHeader
+                    badge="Stay With Us"
+                    title="Make An Appointment"
+                    align="center"
+                    className="mb-10"
+                />
+
                 <div className="grid lg:grid-cols-3 gap-12">
                     <Card className="lg:col-span-2 border-none shadow-2xl p-8 md:p-12 rounded-3xl bg-white">
-                        <div className="space-y-4 mb-10">
-                            <div className="bg-background inline-block px-4 py-1.5 rounded-sm border border-border">
-                                <span className="text-primary text-[12px] font-extrabold tracking-widest uppercase">Stay With Us</span>
-                            </div>
-                            <h2 className="text-[44px] font-extrabold text-foreground">Make An Appointment</h2>
-                        </div>
-
                         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="space-y-2">
                                 <Label htmlFor="firstName" className="font-bold text-sm uppercase tracking-wider text-foreground">First Name</Label>
@@ -51,7 +46,7 @@ const AppointmentForm = ({ formData, handleChange, handleSelectChange, handleSub
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="email" className="font-bold text-sm uppercase tracking-wider text-foreground">Email Address</Label>
+                                <Label htmlFor="email" className="font-bold text-sm uppercase tracking-wider text-foreground">Email</Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -79,7 +74,7 @@ const AppointmentForm = ({ formData, handleChange, handleSelectChange, handleSub
                                 <Label className="font-bold text-sm uppercase tracking-wider text-foreground">Select Type</Label>
                                 <Select value={formData.type} onValueChange={(v) => handleSelectChange('type', v)}>
                                     <SelectTrigger className="h-14 border-border bg-background">
-                                        <SelectValue placeholder="Luxury" />
+                                        <SelectValue placeholder="Select Type" />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="Luxury">Luxury</SelectItem>
@@ -91,7 +86,7 @@ const AppointmentForm = ({ formData, handleChange, handleSelectChange, handleSub
                                 <Label className="font-bold text-sm uppercase tracking-wider text-foreground">Select Room</Label>
                                 <Select value={formData.room} onValueChange={(v) => handleSelectChange('room', v)}>
                                     <SelectTrigger className="h-14 border-border bg-background">
-                                        <SelectValue placeholder="Deluxe Room" />
+                                        <SelectValue placeholder="Select Room" />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="Deluxe">Deluxe Room</SelectItem>
@@ -105,14 +100,17 @@ const AppointmentForm = ({ formData, handleChange, handleSelectChange, handleSub
                                 <div className="relative">
                                     <Input
                                         id="checkIn"
-                                        type="date"
+                                        type="text"
+                                        onFocus={(e) => (e.target.type = "date")}
+                                        onBlur={(e) => (e.target.type = e.target.value ? "date" : "text")}
                                         name="checkIn"
+                                        placeholder="Select date.."
                                         value={formData.checkIn}
                                         onChange={handleChange}
                                         required
-                                        className="h-14 border-border bg-background pl-12"
+                                        className="h-14 border-border bg-background pr-12 [&::-webkit-calendar-picker-indicator]:opacity-0"
                                     />
-                                    <CalendarIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-primary" />
+                                    <CalendarIcon className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-primary pointer-events-none" />
                                 </div>
                             </div>
                             <div className="space-y-2">
@@ -120,14 +118,17 @@ const AppointmentForm = ({ formData, handleChange, handleSelectChange, handleSub
                                 <div className="relative">
                                     <Input
                                         id="checkOut"
-                                        type="date"
+                                        type="text"
+                                        onFocus={(e) => (e.target.type = "date")}
+                                        onBlur={(e) => (e.target.type = e.target.value ? "date" : "text")}
                                         name="checkOut"
+                                        placeholder="Select date.."
                                         value={formData.checkOut}
                                         onChange={handleChange}
                                         required
-                                        className="h-14 border-border bg-background pl-12"
+                                        className="h-14 border-border bg-background pr-12 [&::-webkit-calendar-picker-indicator]:opacity-0"
                                     />
-                                    <CalendarIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-primary" />
+                                    <CalendarIcon className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-primary pointer-events-none" />
                                 </div>
                             </div>
                             <div className="md:col-span-2 space-y-2">
@@ -139,7 +140,7 @@ const AppointmentForm = ({ formData, handleChange, handleSelectChange, handleSub
                                     value={formData.message}
                                     onChange={handleChange}
                                     rows={6}
-                                    className="border-border bg-background p-6 rounded-xl focus-visible:ring-primary"
+                                    className="border-border bg-background p-6 rounded-xl focus-visible:ring-primary resize-none"
                                 />
                             </div>
                             <div className="md:col-span-2 pt-4">

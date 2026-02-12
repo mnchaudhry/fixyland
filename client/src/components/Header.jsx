@@ -71,7 +71,7 @@ const Header = () => {
                     <div className="absolute left-0 top-0 bottom-0 bg-white w-[260px] lg:w-[300px] flex items-center px-8 z-20 shadow-xl transition-all duration-500"
                         style={{ clipPath: 'polygon(0 0, 100% 0, 85% 100%, 0% 100%)' }}>
                         <Link to="/" className="group">
-                            <img src="/logo.png" alt="Fixyland" className="h-10 lg:h-12 group-hover:scale-105 transition-transform" />
+                            <img src="/logo.png" alt="Fixyland" className="h-10 lg:h-12 transition-transform" />
                         </Link>
                     </div>
 
