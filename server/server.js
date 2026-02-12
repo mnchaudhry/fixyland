@@ -19,15 +19,26 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Database Connection
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error('Could not connect to MongoDB', err));
-
 // API Routes
 app.use('/api/staff', staffRoutes);
 app.use('/api/hotels', hotelRoutes);
 app.use('/api/appointments', appointmentRoutes);
 
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Database Connection
+console.log('Connecting to MongoDB...');
+mongoose.connect(process.env.MONGODB_URI, {
+    serverSelectionTimeoutMS: 5000,
+})
+    .then(() => console.log('✅ Connected to MongoDB successfully'))
+    .catch(err => {
+        console.error('❌ Could not connect to MongoDB!');
+        console.error('Error Message:', err.message);
+        console.error('Error Name:', err.name);
+    });
+
+const PORT = parseInt(process.env.PORT) || 5001;
+
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Server is listening on 0.0.0.0:${PORT}`);
+    console.log(`API endpoints are ready at /api`);
+});

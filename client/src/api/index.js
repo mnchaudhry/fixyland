@@ -5,12 +5,12 @@ const api = axios.create({
 });
 
 // Staff API
-export const getStaff = () => api.get('/staff');
+export const getStaff = () => api.get('/api/staff');
 
 // Hotels API
-export const getHotels = () => api.get('/hotels');
+export const getHotels = () => api.get('/api/hotels');
 
 // Appointments API
-export const createAppointment = (data) => api.post('/appointments', data);
+export const createAppointment = (data) => api.post('/api/appointments', data);
 
 export default api;
