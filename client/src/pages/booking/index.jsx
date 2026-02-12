@@ -1,5 +1,5 @@
+import { createAppointment, getHotels } from '@/api';
 import Hero from '@/components/Hero';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import AppointmentForm from './_components/AppointmentForm';
 import HotelListing from './_components/HotelListing';
@@ -8,17 +8,30 @@ const Booking = () => {
 
     //////////////////////////////////////// STATES 
     const [hotels, setHotels] = useState([]);
-    const [formData, setFormData] = useState({ firstName: 'Test', lastName: 'User', email: '', phone: '', type: '', room: '', checkIn: '', checkOut: '', message: 'test' });
+    const [isLoading, setIsLoading] = useState(true);
+    const [formData, setFormData] = useState({
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john.doe@example.com',
+        phone: '+1 987 654 3210',
+        type: 'Luxury',
+        room: 'Deluxe',
+        checkIn: '2025-05-20',
+        checkOut: '2025-05-25',
+        message: 'I would like a room with a sea view if possible.'
+    });
     const [status, setStatus] = useState({ type: '', message: '' });
 
     //////////////////////////////////////// EFFECTS 
     useEffect(() => {
         const fetchHotels = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/hotels');
+                const res = await getHotels();
                 setHotels(res.data);
             } catch (err) {
                 console.error('Error fetching hotels:', err);
+            } finally {
+                setIsLoading(false);
             }
         };
         fetchHotels();
@@ -37,7 +50,7 @@ const Booking = () => {
         e.preventDefault();
         setStatus({ type: 'loading', message: 'Submitting...' });
         try {
-            await axios.post('http://localhost:5000/api/appointments', formData);
+            await createAppointment(formData);
             setStatus({ type: 'success', message: 'Appointment booked successfully!' });
             setFormData({
                 firstName: '',
@@ -50,7 +63,7 @@ const Booking = () => {
                 checkOut: '',
                 message: ''
             });
-            setTimeout(() => setStatus({ type: '', message: '' }), 5000);
+            setTimeout(() => setStatus({ type: '', message: '' }), 5001);
         } catch (err) {
             setStatus({ type: 'error', message: 'Error booking appointment.' });
             console.error(err);
@@ -67,7 +80,7 @@ const Booking = () => {
                 handleSubmit={handleSubmit}
                 status={status}
             />
-            <HotelListing hotels={hotels} />
+            <HotelListing hotels={hotels} isLoading={isLoading} />
         </div>
     );
 };

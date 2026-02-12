@@ -4,47 +4,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Bath, Bed, Users } from 'lucide-react';
 
 const HotelListing = ({ hotels }) => {
-    // Dummy data fallback matching the screenshot
-    const defaultHotels = [
-        {
-            _id: '1',
-            name: 'Deluxe Rooms',
-            price: '300',
-            image: '/assets/images/room-1.jpg', // Placeholder, using a valid path if possible or absolute URL
-            guests: 2,
-            beds: 2,
-            baths: 1,
-            description: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered.'
-        },
-        {
-            _id: '2',
-            name: 'Junior Rooms',
-            price: '400',
-            image: '/assets/images/room-2.jpg',
-            guests: 2,
-            beds: 2,
-            baths: 1,
-            description: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered.'
-        },
-        {
-            _id: '3',
-            name: 'Family Rooms',
-            price: '600',
-            image: '/assets/images/room-3.jpg',
-            guests: 2,
-            beds: 2,
-            baths: 1,
-            description: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered.'
-        }
-    ];
-
-    // Use passed hotels or fallback to defaultHotels
-    const displayHotels = (hotels && hotels.length > 0) ? hotels : defaultHotels;
-
     return (
         <section className="py-24 bg-primary font-sans">
             <div className="container mx-auto px-4 text-center">
-
                 <SectionHeader
                     title="Luxury Rooms and Resort"
                     description=""
@@ -54,7 +16,7 @@ const HotelListing = ({ hotels }) => {
                 />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {displayHotels.map((hotel, index) => (
+                    {hotels.map((hotel, index) => (
                         <Card key={hotel._id || index} className="group overflow-hidden border-none shadow-xl hover:shadow-2xl transition-all duration-500 rounded-3xl bg-white text-left flex flex-col h-full">
                             <div className="relative h-[250px] overflow-hidden">
                                 <img

@@ -97,38 +97,44 @@ const AppointmentForm = ({ formData, handleChange, handleSelectChange, handleSub
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="checkIn" className="font-bold text-sm uppercase tracking-wider text-foreground">Check In</Label>
-                                <div className="relative">
+                                <div className="relative group/date">
                                     <Input
                                         id="checkIn"
-                                        type="text"
-                                        onFocus={(e) => (e.target.type = "date")}
-                                        onBlur={(e) => (e.target.type = e.target.value ? "date" : "text")}
+                                        type="date"
                                         name="checkIn"
-                                        placeholder="Select date.."
                                         value={formData.checkIn}
                                         onChange={handleChange}
                                         required
-                                        className="h-14 border-border bg-background pr-12 [&::-webkit-calendar-picker-indicator]:opacity-0"
+                                        className="h-14 border-border bg-background pr-12 cursor-text"
                                     />
-                                    <CalendarIcon className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-primary pointer-events-none" />
+                                    <CalendarIcon
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-primary cursor-pointer active:scale-90 transition-transform"
+                                        onClick={(e) => {
+                                            const input = e.currentTarget.previousElementSibling;
+                                            if (input && input.showPicker) input.showPicker();
+                                        }}
+                                    />
                                 </div>
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="checkOut" className="font-bold text-sm uppercase tracking-wider text-foreground">Check Out</Label>
-                                <div className="relative">
+                                <div className="relative group/date">
                                     <Input
                                         id="checkOut"
-                                        type="text"
-                                        onFocus={(e) => (e.target.type = "date")}
-                                        onBlur={(e) => (e.target.type = e.target.value ? "date" : "text")}
+                                        type="date"
                                         name="checkOut"
-                                        placeholder="Select date.."
                                         value={formData.checkOut}
                                         onChange={handleChange}
                                         required
-                                        className="h-14 border-border bg-background pr-12 [&::-webkit-calendar-picker-indicator]:opacity-0"
+                                        className="h-14 border-border bg-background pr-12 cursor-text"
                                     />
-                                    <CalendarIcon className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-primary pointer-events-none" />
+                                    <CalendarIcon
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-primary cursor-pointer active:scale-90 transition-transform"
+                                        onClick={(e) => {
+                                            const input = e.currentTarget.previousElementSibling;
+                                            if (input && input.showPicker) input.showPicker();
+                                        }}
+                                    />
                                 </div>
                             </div>
                             <div className="md:col-span-2 space-y-2">

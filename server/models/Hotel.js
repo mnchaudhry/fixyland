@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const hotelSchema = new mongoose.Schema({
     name: { type: String, required: true },
@@ -10,4 +10,4 @@ const hotelSchema = new mongoose.Schema({
     baths: { type: Number, required: true },
 });
 
-module.exports = mongoose.model('Hotel', hotelSchema);
+export default mongoose.model('Hotel', hotelSchema);
