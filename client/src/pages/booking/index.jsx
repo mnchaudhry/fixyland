@@ -9,6 +9,7 @@ const Booking = () => {
     //////////////////////////////////////// STATES 
     const [hotels, setHotels] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [formData, setFormData] = useState({
         firstName: 'John',
         lastName: 'Doe',
@@ -28,8 +29,10 @@ const Booking = () => {
             try {
                 const res = await getHotels();
                 setHotels(res.data);
+                setError(null);
             } catch (err) {
                 console.error('Error fetching hotels:', err);
+                setError('Failed to load available rooms. Please try again later.');
             } finally {
                 setIsLoading(false);
             }
@@ -80,7 +83,7 @@ const Booking = () => {
                 handleSubmit={handleSubmit}
                 status={status}
             />
-            <HotelListing hotels={hotels} isLoading={isLoading} />
+            <HotelListing hotels={hotels} isLoading={isLoading} error={error} />
         </div>
     );
 };

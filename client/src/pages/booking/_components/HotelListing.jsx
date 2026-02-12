@@ -1,9 +1,10 @@
 import SectionHeader from "@/components/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowRight, Bath, Bed, Users } from 'lucide-react';
 
-const HotelListing = ({ hotels }) => {
+const HotelListing = ({ hotels, isLoading, error }) => {
     return (
         <section className="py-24 bg-primary font-sans">
             <div className="container mx-auto px-4 text-center">
@@ -16,50 +17,78 @@ const HotelListing = ({ hotels }) => {
                 />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {hotels.map((hotel, index) => (
-                        <Card key={hotel._id || index} className="group overflow-hidden border-none shadow-xl hover:shadow-2xl transition-all duration-500 rounded-3xl bg-white text-left flex flex-col h-full">
-                            <div className="relative h-[250px] overflow-hidden">
-                                <img
-                                    src={hotel.image.startsWith('/') ? `https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&q=80&w=800` : hotel.image}
-                                    alt={hotel.name}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                />
-                                <div className="absolute top-4 left-4">
-                                    <div className="bg-primary text-white text-sm font-bold px-3 py-1.5 rounded-md shadow-lg">
-                                        ${hotel.price} / Night
+                    {isLoading ? (
+                        Array.from({ length: 3 }).map((_, index) => (
+                            <Card key={index} className="overflow-hidden border-none shadow-xl rounded-3xl bg-white flex flex-col h-[500px]">
+                                <Skeleton className="h-[250px] w-full" />
+                                <CardContent className="p-8 flex flex-col flex-grow">
+                                    <Skeleton className="h-8 w-3/4 mb-4" />
+                                    <div className="flex items-center gap-6 mb-6">
+                                        <Skeleton className="h-5 w-20" />
+                                        <Skeleton className="h-5 w-20" />
+                                        <Skeleton className="h-5 w-20" />
+                                    </div>
+                                    <Skeleton className="h-4 w-full mb-2" />
+                                    <Skeleton className="h-4 w-full mb-2" />
+                                    <Skeleton className="h-4 w-2/3 mb-8" />
+                                    <Skeleton className="mt-auto h-12 w-32 rounded-md" />
+                                </CardContent>
+                            </Card>
+                        ))
+                    ) : error ? (
+                        <div className="col-span-full py-20 text-center">
+                            <p className="text-white font-bold text-xl">{error}</p>
+                        </div>
+                    ) : hotels.length === 0 ? (
+                        <div className="col-span-full py-20 text-center">
+                            <p className="text-white/70 text-xl font-medium">No rooms available at the moment.</p>
+                        </div>
+                    ) : (
+                        hotels.map((hotel, index) => (
+                            <Card key={hotel._id || index} className="group overflow-hidden border-none shadow-xl hover:shadow-2xl transition-all duration-500 rounded-3xl bg-white text-left flex flex-col h-full">
+                                <div className="relative h-[250px] overflow-hidden">
+                                    <img
+                                        src={hotel.image.startsWith('/') ? `https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&q=80&w=800` : hotel.image}
+                                        alt={hotel.name}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    />
+                                    <div className="absolute top-4 left-4">
+                                        <div className="bg-primary text-white text-sm font-bold px-3 py-1.5 rounded-md shadow-lg">
+                                            ${hotel.price} / Night
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <CardContent className="p-8 flex flex-col flex-grow">
-                                <h3 className="text-[24px] font-black text-foreground mb-4">{hotel.name}</h3>
+                                <CardContent className="p-8 flex flex-col flex-grow">
+                                    <h3 className="text-[24px] font-black text-foreground mb-4">{hotel.name}</h3>
 
-                                <div className="flex items-center gap-6 mb-6 text-muted-foreground text-[14px] font-bold border-b border-border pb-6">
-                                    <div className="flex items-center gap-2">
-                                        <Users className="h-5 w-5 text-primary" />
-                                        <span>{hotel.guests} Guests</span>
+                                    <div className="flex items-center gap-6 mb-6 text-muted-foreground text-[14px] font-bold border-b border-border pb-6">
+                                        <div className="flex items-center gap-2">
+                                            <Users className="h-5 w-5 text-primary" />
+                                            <span>{hotel.guests} Guests</span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Bed className="h-5 w-5 text-primary" />
+                                            <span>{hotel.beds} Beds</span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Bath className="h-5 w-5 text-primary" />
+                                            <span>{hotel.baths} Bath</span>
+                                        </div>
                                     </div>
-                                    <div className="flex items-center gap-2">
-                                        <Bed className="h-5 w-5 text-primary" />
-                                        <span>{hotel.beds} Beds</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <Bath className="h-5 w-5 text-primary" />
-                                        <span>{hotel.baths} Bath</span>
-                                    </div>
-                                </div>
 
-                                <p className="text-muted-foreground leading-relaxed mb-8 line-clamp-3 text-[15px]">
-                                    {hotel.description}
-                                </p>
+                                    <p className="text-muted-foreground leading-relaxed mb-8 line-clamp-3 text-[15px]">
+                                        {hotel.description}
+                                    </p>
 
-                                <div className="mt-auto">
-                                    <Button className="w-fit bg-primary hover:bg-primary/90 text-white font-bold h-12 px-8 rounded-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                                        Read More <ArrowRight className="ml-2 h-4 w-4" />
-                                    </Button>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    ))}
+                                    <div className="mt-auto">
+                                        <Button className="w-fit bg-primary hover:bg-primary/90 text-white font-bold h-12 px-8 rounded-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                                            Read More <ArrowRight className="ml-2 h-4 w-4" />
+                                        </Button>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        ))
+                    )}
                 </div>
             </div>
         </section>

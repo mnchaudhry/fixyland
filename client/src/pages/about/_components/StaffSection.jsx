@@ -1,8 +1,30 @@
 import SectionHeader from "@/components/SectionHeader";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Plus } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { getStaff } from '@/api';
 
-const StaffSection = ({ staff, isLoading }) => {
+const StaffSection = () => {
+    const [staff, setStaff] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchStaff = async () => {
+            try {
+                const res = await getStaff();
+                setStaff(res.data);
+                setError(null);
+            } catch (err) {
+                console.error('Error fetching staff:', err);
+                setError('Failed to load staff members. Please try again later.');
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchStaff();
+    }, []);
+
     return (
         <section className="flex items-center bg-white py-32">
             <div className="container mx-auto px-4 flex flex-col items-center justify-center">
@@ -27,6 +49,14 @@ const StaffSection = ({ staff, isLoading }) => {
                                 </div>
                             </div>
                         ))
+                    ) : error ? (
+                        <div className="col-span-full py-10 text-center">
+                            <p className="text-destructive font-bold text-lg">{error}</p>
+                        </div>
+                    ) : staff.length === 0 ? (
+                        <div className="col-span-full py-10 text-center">
+                            <p className="text-muted-foreground text-lg">No staff found.</p>
+                        </div>
                     ) : (
                         staff.slice(0, 4).map((member) => (
                             <div key={member._id} className="relative group overflow-hidden rounded-lg bg-white shadow-xl hover:-translate-y-2 transition-all duration-500">
