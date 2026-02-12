@@ -54,6 +54,7 @@ module.exports = {
         // Custom branding colors
         navbar: "var(--navbar)",
         footer: "var(--footer)",
+        premium: "var(--premium)",
       },
       borderRadius: {
         lg: "var(--radius)",

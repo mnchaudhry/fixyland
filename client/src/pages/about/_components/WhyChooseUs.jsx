@@ -2,7 +2,7 @@ import SectionHeader from "@/components/SectionHeader";
 
 const WhyChooseUs = () => {
     return (
-        <section className="py-24 bg-white">
+        <section className="py-32 bg-white">
             <div className="container mx-auto px-4">
                 <div className="grid lg:grid-cols-2 gap-20 items-center">
 

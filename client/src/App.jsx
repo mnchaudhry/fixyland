@@ -2,8 +2,13 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import About from './pages/about';
+import Blog from './pages/blog';
 import Booking from './pages/booking';
+import Contact from './pages/contact';
+import Home from './pages/home';
 import NotFound from './pages/not-found';
+import Rooms from './pages/rooms';
+import Services from './pages/services';
 
 function App() {
   return (
@@ -12,8 +17,12 @@ function App() {
         <Header />
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<About />} />
+            <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/rooms" element={<Rooms />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/booking" element={<Booking />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

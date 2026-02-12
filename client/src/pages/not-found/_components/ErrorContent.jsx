@@ -8,7 +8,7 @@ const ErrorContent = () => {
             <div className="container mx-auto px-4 max-w-2xl">
                 <div className="relative mb-12">
                     <img
-                        src="/not-found.png"
+                        src="/404.png"
                         alt="404"
                         className="mx-auto max-w-md w-full rounded-3xl"
                     />
